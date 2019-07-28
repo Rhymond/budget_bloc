@@ -1,0 +1,1 @@
+enum AppTab { expenses, budget, income }
