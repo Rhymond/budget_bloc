@@ -3,8 +3,8 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo/blocs/blocs.dart';
 import 'package:todo/screens/screens.dart';
-import 'package:todo/routes.dart';
-import 'package:todo/theme.dart';
+import 'package:todo/constants/routes.dart';
+import 'package:todo/constants/theme.dart';
 import 'package:todo/repositories/repositories.dart';
 import 'package:path_provider/path_provider.dart';
 

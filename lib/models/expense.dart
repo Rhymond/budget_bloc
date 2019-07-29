@@ -10,7 +10,7 @@ class Expense extends Equatable {
   final int amount;
   final String name;
 
-  Expense(this.name, {String category = '', String id, int amount})
+  Expense(this.name, {String category, String id, int amount})
       : this.category = category ?? 'Other',
         this.id = id ?? Uuid().generateV4(),
         this.amount = amount ?? 0,

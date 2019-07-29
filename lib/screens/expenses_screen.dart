@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo/widgets/widgets.dart';
-import 'package:todo/routes.dart';
+import 'package:todo/constants/routes.dart';
 
 class ExpensesScreen extends StatelessWidget {
   @override
