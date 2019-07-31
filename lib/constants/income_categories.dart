@@ -1,8 +1,9 @@
-class Categories {
+class IncomeCategories {
   static List<String> get list {
     return [
-      "Utilities",
-      "Bills",
+      "Paycheck",
+      "Tips",
+      "Gift",
       "Other",
     ];
   }

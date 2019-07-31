@@ -2,13 +2,13 @@
 // Use of this source code is governed by the MIT license that can be found
 // in the LICENSE file.
 
-class ExpenseEntity {
+class IncomeEntity {
   final String id;
   final String category;
   final int amount;
   final String name;
 
-  ExpenseEntity(this.name, this.id, this.amount, this.category);
+  IncomeEntity(this.name, this.id, this.amount, this.category);
 
   @override
   int get hashCode =>
@@ -17,7 +17,7 @@ class ExpenseEntity {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-          other is ExpenseEntity &&
+          other is IncomeEntity &&
               runtimeType == other.runtimeType &&
               category == other.category &&
               name == other.name &&
@@ -35,11 +35,11 @@ class ExpenseEntity {
 
   @override
   String toString() {
-    return 'ExpenseEntity {category: $category, amount: $amount, name: $name, id: $id}';
+    return 'IncomeEntity {category: $category, amount: $amount, name: $name, id: $id}';
   }
 
-  static ExpenseEntity fromJson(Map<String, Object> json) {
-    return ExpenseEntity(
+  static IncomeEntity fromJson(Map<String, Object> json) {
+    return IncomeEntity(
       json["name"] as String,
       json["id"] as String,
       json["amount"] as int,

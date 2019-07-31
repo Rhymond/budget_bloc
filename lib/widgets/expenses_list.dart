@@ -8,17 +8,13 @@ import 'package:todo/widgets/widgets.dart';
 import 'package:todo/constants/routes.dart';
 import 'package:todo/models/models.dart';
 
-// The base class for the different types of items the list can contain.
-abstract class ListItem {}
 
-// A ListItem that contains data to display a heading.
-class HeadingListItem implements ListItem {
+class ExpenseHeadingListItem implements ListItem {
   final String heading;
 
-  HeadingListItem(this.heading);
+  ExpenseHeadingListItem(this.heading);
 }
 
-// A ListItem that contains data to display a message.
 class ExpenseListItem implements ListItem {
   final Expense expense;
 
@@ -45,7 +41,7 @@ class ExpensesList extends StatelessWidget {
     });
 
     catMap.forEach((cat, val) {
-      displayList.add(HeadingListItem(cat));
+      displayList.add(ExpenseHeadingListItem(cat));
       displayList.addAll(val);
     });
 
@@ -54,7 +50,7 @@ class ExpensesList extends StatelessWidget {
       itemBuilder: (BuildContext context, int index) {
         final item = displayList[index];
 
-        if (item is HeadingListItem) {
+        if (item is ExpenseHeadingListItem) {
           return ExpenseHeading(heading: item.heading);
         }
 
@@ -63,8 +59,8 @@ class ExpensesList extends StatelessWidget {
             expense: item.expense,
             onDismissed: (dir) {
               expensesBloc.dispatch(DeleteExpense(item.expense));
-              Scaffold.of(context).showSnackBar(DeleteExpenseSnackBar(
-                expense: item.expense,
+              Scaffold.of(context).showSnackBar(DeleteItemSnackBar(
+                name: item.expense.name,
                 onUndo: () => expensesBloc.dispatch(AddExpense(item.expense)),
               ));
             },

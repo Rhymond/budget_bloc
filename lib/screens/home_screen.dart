@@ -8,13 +8,28 @@ import 'package:todo/screens/screens.dart';
 class HomeScreen extends StatelessWidget {
   Widget _getBody(context, AppTab activeTab) {
     final expensesBloc = BlocProvider.of<ExpensesBloc>(context);
+    final incomesBloc = BlocProvider.of<IncomesBloc>(context);
 
-    if (activeTab == AppTab.expenses) {
-      expensesBloc.dispatch(LoadExpenses());
-      return ExpensesScreen();
+    switch (activeTab) {
+      case AppTab.expenses:
+        {
+          expensesBloc.dispatch(LoadExpenses());
+          return ExpensesScreen();
+        }
+
+      case AppTab.income:
+        {
+          incomesBloc.dispatch(LoadIncomes());
+          return IncomesScreen();
+        }
+
+      case AppTab.budget:
+        {
+          return Text('Whut??');
+        }
     }
 
-    return Text('Whut?');
+    return Text('Whut??');
   }
 
   @override

@@ -5,12 +5,6 @@ import 'package:todo/blocs/expenses/expenses.dart';
 import 'package:todo/models/models.dart';
 import 'package:todo/repositories/repositories.dart';
 
-List<Expense> listOfExpenses = [
-  Expense("expense 4", category: 'other', amount: 120),
-  Expense("expense 2", category: 'other', amount: 73),
-  Expense("expense 3", category: 'misc', amount: 30),
-];
-
 class ExpensesBloc extends Bloc<ExpensesEvent, ExpensesState> {
   final ExpensesRepository expensesRepository;
 

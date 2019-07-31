@@ -2,22 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:todo/blocs/blocs.dart';
 import 'package:todo/models/models.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:todo/constants/expense_categories.dart';
+import 'package:todo/constants/income_categories.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
 
-class ExpensesFormScreen extends StatefulWidget {
+class IncomesFormScreen extends StatefulWidget {
   final bool isEditing;
 
-  ExpensesFormScreen({
+  IncomesFormScreen({
     Key key,
     @required this.isEditing,
   }) : super(key: key);
 
   @override
-  _ExpensesFormScreenState createState() => _ExpensesFormScreenState();
+  _IncomesFormScreenState createState() => _IncomesFormScreenState();
 }
 
-class _ExpensesFormScreenState extends State<ExpensesFormScreen> {
+class _IncomesFormScreenState extends State<IncomesFormScreen> {
   static final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   static final amountController = new MoneyMaskedTextController(
     initialValue: 0,
@@ -39,27 +39,26 @@ class _ExpensesFormScreenState extends State<ExpensesFormScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final expensesBloc = BlocProvider.of<ExpensesBloc>(context);
-    print(ModalRoute.of(context).settings.arguments);
-    final Expense expense = ModalRoute.of(context).settings.arguments;
+    final incomesBloc = BlocProvider.of<IncomesBloc>(context);
+    final Income income = ModalRoute.of(context).settings.arguments;
 
     if (isEditing) {
-      amountController.updateValue(expense.amount.toDouble() / 100);
+      amountController.updateValue(income.amount.toDouble() / 100);
     }
 
-    String categoryValue = ExpenseCategories.list[0];
+    String categoryValue = IncomeCategories.list[0];
     if (_category != null) {
       categoryValue = _category;
-    } else if (isEditing && expense.category != '') {
-      categoryValue = expense.category;
-      _category = expense.category;
+    } else if (isEditing && income.category != '') {
+      categoryValue = income.category;
+      _category = income.category;
     } else {
       _category = categoryValue;
     }
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(isEditing ? 'Edit Expense' : 'Add Expense'),
+        title: Text(isEditing ? 'Edit Income' : 'Add Income'),
       ),
       body: Padding(
         padding: EdgeInsets.all(16.0),
@@ -68,7 +67,7 @@ class _ExpensesFormScreenState extends State<ExpensesFormScreen> {
           child: ListView(
             children: [
               TextFormField(
-                initialValue: isEditing ? expense.name : '',
+                initialValue: isEditing ? income.name : '',
                 autofocus: !isEditing,
                 textInputAction: TextInputAction.next,
                 decoration: InputDecoration(
@@ -85,7 +84,7 @@ class _ExpensesFormScreenState extends State<ExpensesFormScreen> {
                 decoration: InputDecoration(
                   labelText: "Category",
                 ),
-                items: ExpenseCategories.list
+                items: IncomeCategories.list
                     .map((v) => DropdownMenuItem(
                           child: Text(v),
                           value: v,
@@ -125,11 +124,11 @@ class _ExpensesFormScreenState extends State<ExpensesFormScreen> {
             _formKey.currentState.save();
 
             if (isEditing) {
-              expensesBloc.dispatch(UpdateExpense(Expense(_name,
-                  id: expense.id, amount: _amount, category: _category)));
+              incomesBloc.dispatch(UpdateIncome(Income(_name,
+                  id: income.id, amount: _amount, category: _category)));
             } else {
-              expensesBloc.dispatch(AddExpense(
-                  Expense(_name, amount: _amount, category: _category)));
+              incomesBloc.dispatch(AddIncome(
+                  Income(_name, amount: _amount, category: _category)));
             }
 
             Navigator.pop(context);

@@ -1,4 +1,4 @@
-enum AppTab { expenses, budget, income }
+enum AppTab { expenses, income, budget }
 
 class AppTabUtil {
   static String getName(AppTab tab) {

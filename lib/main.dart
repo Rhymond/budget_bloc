@@ -14,15 +14,29 @@ void main() {
   // This will allow us to handle all transitions and errors in SimpleBlocDelegate.
   BlocSupervisor.delegate = SimpleBlocDelegate();
   runApp(
-    BlocProvider(
-      builder: (context) {
-        return ExpensesBloc(
-          expensesRepository: ExpensesRepository(
-            '__expenses__',
-            getApplicationDocumentsDirectory,
-          ),
-        );
-      },
+    MultiBlocProvider(
+      providers: [
+        BlocProvider<ExpensesBloc>(
+          builder: (context) {
+            return ExpensesBloc(
+              expensesRepository: ExpensesRepository(
+                '__expenses__',
+                getApplicationDocumentsDirectory,
+              ),
+            );
+          },
+        ),
+        BlocProvider<IncomesBloc>(
+          builder: (context) {
+            return IncomesBloc(
+              incomesRepository: IncomesRepository(
+                '__incomes__',
+                getApplicationDocumentsDirectory,
+              ),
+            );
+          },
+        ),
+      ],
       child: App(),
     ),
   );
@@ -52,6 +66,16 @@ class App extends StatelessWidget {
         },
         Routes.editExpense: (context) {
           return ExpensesFormScreen(
+            isEditing: true,
+          );
+        },
+        Routes.addIncome: (context) {
+          return IncomesFormScreen(
+            isEditing: false,
+          );
+        },
+        Routes.editIncome: (context) {
+          return IncomesFormScreen(
             isEditing: true,
           );
         }

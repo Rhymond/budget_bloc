@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:todo/models/models.dart';
 
-class DeleteExpenseSnackBar extends SnackBar {
-  DeleteExpenseSnackBar({
+class DeleteItemSnackBar extends SnackBar {
+  DeleteItemSnackBar({
     Key key,
-    @required Expense expense,
+    @required String name,
     @required VoidCallback onUndo,
   }) : super(
           key: key,
           content: Text(
-            'deleted "${expense.name}"',
+            'deleted "$name"',
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),

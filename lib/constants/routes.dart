@@ -4,6 +4,10 @@
 
 class Routes {
   static final home = "/";
+
   static final addExpense = "/addExpense";
   static final editExpense = "/editExpense";
+
+  static final addIncome = "/addIncome";
+  static final editIncome = "/editIncome";
 }

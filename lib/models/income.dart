@@ -4,20 +4,20 @@ import 'package:equatable/equatable.dart';
 import 'package:todo/entities/entities.dart';
 
 @immutable
-class Expense extends Equatable {
+class Income extends Equatable {
   final String id;
   final String category;
   final int amount;
   final String name;
 
-  Expense(this.name, {String category, String id, int amount})
+  Income(this.name, {String category, String id, int amount})
       : this.category = category ?? 'Other',
         this.id = id ?? Uuid().generateV4(),
         this.amount = amount ?? 0,
         super([category, id, name, amount]);
 
-  Expense copyWith({String id, String name, int amount, String category}) {
-    return Expense(
+  Income copyWith({String id, String name, int amount, String category}) {
+    return Income(
       name ?? this.name,
       category: category ?? this.category,
       id: id ?? this.id,
@@ -25,12 +25,12 @@ class Expense extends Equatable {
     );
   }
 
-  ExpenseEntity toEntity() {
-    return ExpenseEntity(name, id, amount, category);
+  IncomeEntity toEntity() {
+    return IncomeEntity(name, id, amount, category);
   }
 
-  static Expense fromEntity(ExpenseEntity entity) {
-    return Expense(
+  static Income fromEntity(IncomeEntity entity) {
+    return Income(
       entity.name,
       category: entity.category ?? '',
       amount: entity.amount ?? 0,
@@ -40,6 +40,6 @@ class Expense extends Equatable {
 
   @override
   String toString() {
-    return 'Expense { name: $name, category: $category, amount: $amount, id: $id }';
+    return 'Income { name: $name, category: $category, amount: $amount, id: $id }';
   }
 }
