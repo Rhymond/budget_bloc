@@ -34,7 +34,7 @@ class DrawerSelector extends StatelessWidget {
           padding: EdgeInsets.zero,
           children: AppTab.values.map((tab) {
             return ListTile(
-              title: Text(_getTitle(tab)),
+              title: Text(AppTabUtil.getName(tab)),
               selected: this.activeTab == tab,
               onTap: () {
                 onTabSelected(AppTab.values[tab.index]);

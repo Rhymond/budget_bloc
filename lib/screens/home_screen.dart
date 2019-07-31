@@ -25,7 +25,7 @@ class HomeScreen extends StatelessWidget {
         return Scaffold(
           body: _getBody(context, activeTab),
           appBar: AppBar(
-            title: Text('Home Screen ' + activeTab.toString()),
+            title: Text(AppTabUtil.getName(activeTab)),
           ),
           drawer: DrawerSelector(
             activeTab: activeTab,
