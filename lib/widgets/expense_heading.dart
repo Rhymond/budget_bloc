@@ -1,7 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:todo/models/models.dart';
-import 'package:todo/widgets/widgets.dart';
 
 class ExpenseHeading extends StatelessWidget {
   final String heading;

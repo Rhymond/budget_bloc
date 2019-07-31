@@ -27,7 +27,7 @@ class HomeScreen extends StatelessWidget {
           appBar: AppBar(
             title: Text('Home Screen ' + activeTab.toString()),
           ),
-          bottomNavigationBar: TabSelector(
+          drawer: DrawerSelector(
             activeTab: activeTab,
             onTabSelected: (tab) => tabBloc.dispatch(UpdateTab(tab)),
           ),

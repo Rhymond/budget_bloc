@@ -3,6 +3,8 @@ import 'package:todo/blocs/blocs.dart';
 import 'package:todo/models/models.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo/constants/categories.dart';
+import 'package:flutter_masked_text/flutter_masked_text.dart';
+import 'package:money/money.dart';
 
 class ExpensesFormScreen extends StatefulWidget {
   final bool isEditing;
@@ -18,6 +20,11 @@ class ExpensesFormScreen extends StatefulWidget {
 
 class _ExpensesFormScreenState extends State<ExpensesFormScreen> {
   static final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  static final amountController = new MoneyMaskedTextController(
+    initialValue: 0,
+    decimalSeparator: '.',
+    thousandSeparator: '',
+  );
 
   String _name;
   String _category;
@@ -26,9 +33,19 @@ class _ExpensesFormScreenState extends State<ExpensesFormScreen> {
   bool get isEditing => widget.isEditing;
 
   @override
+  void dispose() {
+    amountController.updateValue(0);
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final expensesBloc = BlocProvider.of<ExpensesBloc>(context);
     final Expense expense = ModalRoute.of(context).settings.arguments;
+
+    if (isEditing) {
+      amountController.updateValue(expense.amount.toDouble() / 100);
+    }
 
     String categoryValue = Categories.list[0];
     if (_category != null) {
@@ -82,26 +99,21 @@ class _ExpensesFormScreenState extends State<ExpensesFormScreen> {
               ),
               SizedBox(height: 16),
               TextFormField(
-                initialValue: isEditing ? expense.amount.toString() : '',
+                controller: amountController,
                 autocorrect: false,
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
                   labelText: 'Amount',
                 ),
                 validator: (String value) {
-                  if (value.trim().isEmpty) {
-                    return 'Amount is required';
-                  }
-                  final n = int.tryParse(value);
-                  if (n == null) {
-                    return '"$value" is not a valid number';
-                  }
-                  if (n <= 0) {
-                    return 'amount must be positive';
+                  if (amountController.numberValue <= 0) {
+                    return 'Amount must be positive';
                   }
                   return null;
                 },
-                onSaved: (value) => _amount = int.tryParse(value),
+                onSaved: (value) {
+                  _amount = (amountController.numberValue * 100).toInt();
+                },
               ),
             ],
           ),
@@ -111,6 +123,7 @@ class _ExpensesFormScreenState extends State<ExpensesFormScreen> {
         onPressed: () {
           if (_formKey.currentState.validate()) {
             _formKey.currentState.save();
+
             if (isEditing) {
               expensesBloc.dispatch(UpdateExpense(Expense(_name,
                   id: expense.id, amount: _amount, category: _category)));
