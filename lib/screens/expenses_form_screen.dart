@@ -35,6 +35,9 @@ class _ExpensesFormScreenState extends State<ExpensesFormScreen> {
       categoryValue = _category;
     } else if (isEditing && expense.category != '') {
       categoryValue = expense.category;
+      _category = expense.category;
+    } else {
+      _category = categoryValue;
     }
 
     return Scaffold(
