@@ -4,7 +4,6 @@ import 'package:todo/models/models.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo/constants/categories.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
-import 'package:money/money.dart';
 
 class ExpensesFormScreen extends StatefulWidget {
   final bool isEditing;

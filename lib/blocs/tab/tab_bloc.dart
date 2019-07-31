@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:todo/blocs/tab/tab.dart';
-import 'package:todo/models/models.dart';
+import 'package:todo/constants/app_tab.dart';
 
 class TabBloc extends Bloc<TabEvent, AppTab> {
   @override

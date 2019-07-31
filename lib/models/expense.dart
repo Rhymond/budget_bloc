@@ -25,11 +25,6 @@ class Expense extends Equatable {
     );
   }
 
-  @override
-  String toString() {
-    return 'Todo { name: $name, category: $category, amount: $amount, id: $id }';
-  }
-
   ExpenseEntity toEntity() {
     return ExpenseEntity(name, id, amount, category);
   }
@@ -41,5 +36,10 @@ class Expense extends Equatable {
       amount: entity.amount ?? 0,
       id: entity.id ?? Uuid().generateV4(),
     );
+  }
+
+  @override
+  String toString() {
+    return 'Todo { name: $name, category: $category, amount: $amount, id: $id }';
   }
 }

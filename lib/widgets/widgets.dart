@@ -1,4 +1,3 @@
-export './tab_selector.dart';
 export './drawer_selector.dart';
 export './expense_item.dart';
 export './expenses_list.dart';

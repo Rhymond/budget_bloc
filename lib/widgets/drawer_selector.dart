@@ -1,24 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:todo/models/models.dart';
+import 'package:todo/constants/app_tab.dart';
 
 class DrawerSelector extends StatelessWidget {
   final AppTab activeTab;
   final Function(AppTab) onTabSelected;
-
-  String _getTitle(AppTab tab) {
-    switch (tab) {
-      case AppTab.budget:
-        return 'Budget';
-      case AppTab.income:
-        return 'Income';
-      case AppTab.expenses:
-        return 'Expenses';
-    }
-
-    return '';
-  }
 
   DrawerSelector({
     Key key,
