@@ -10,4 +10,6 @@ class Routes {
 
   static final addIncome = "/addIncome";
   static final editIncome = "/editIncome";
+
+  static final editSavings = "/editSavings";
 }

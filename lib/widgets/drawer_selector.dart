@@ -18,20 +18,34 @@ class DrawerSelector extends StatelessWidget {
     return Drawer(
       child: SafeArea(
         child: ListView(
-          padding: EdgeInsets.zero,
-          children: AppTab.values.map((tab) {
-            return ListTile(
-              title: Text(
-                AppTabUtil.getName(tab),
-              ),
-              selected: this.activeTab == tab,
-              onTap: () {
-                onTabSelected(AppTab.values[tab.index]);
-                Navigator.pop(context);
-              },
-            );
-          }).toList(),
-        ),
+            padding: EdgeInsets.zero,
+            children: [
+              Container(
+                color: Theme.of(context).primaryColor,
+                child: ListTile(
+                  title: Text(
+                    'BUDGET',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              )
+            ]..addAll(AppTab.values.map((tab) {
+                return ListTile(
+                  leading: Icon(AppTabUtil.getIcon(tab)),
+                  title: Text(
+                    AppTabUtil.getName(tab),
+                  ),
+                  selected: this.activeTab == tab,
+                  onTap: () {
+                    onTabSelected(AppTab.values[tab.index]);
+                    Navigator.pop(context);
+                  },
+                );
+              }).toList())),
       ),
     );
   }

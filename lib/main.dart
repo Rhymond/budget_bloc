@@ -36,6 +36,16 @@ void main() {
             );
           },
         ),
+        BlocProvider<SavingsBloc>(
+          builder: (context) {
+            return SavingsBloc(
+              savingsRepository: SavingsRepository(
+                '__savings__',
+                getApplicationDocumentsDirectory,
+              ),
+            );
+          },
+        ),
       ],
       child: App(),
     ),
@@ -78,7 +88,7 @@ class App extends StatelessWidget {
           return IncomesFormScreen(
             isEditing: true,
           );
-        }
+        },
       },
     );
   }

@@ -40,7 +40,6 @@ class _ExpensesFormScreenState extends State<ExpensesFormScreen> {
   @override
   Widget build(BuildContext context) {
     final expensesBloc = BlocProvider.of<ExpensesBloc>(context);
-    print(ModalRoute.of(context).settings.arguments);
     final Expense expense = ModalRoute.of(context).settings.arguments;
 
     if (isEditing) {

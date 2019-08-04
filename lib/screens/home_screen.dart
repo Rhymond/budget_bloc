@@ -8,9 +8,16 @@ import 'package:todo/screens/screens.dart';
 class HomeScreen extends StatelessWidget {
   Widget _getBody(context, AppTab activeTab) {
     final expensesBloc = BlocProvider.of<ExpensesBloc>(context);
+    final savingsBloc = BlocProvider.of<SavingsBloc>(context);
     final incomesBloc = BlocProvider.of<IncomesBloc>(context);
 
     switch (activeTab) {
+      case AppTab.savings:
+        {
+          savingsBloc.dispatch(LoadSavings());
+          incomesBloc.dispatch(LoadIncomes());
+          return SavingsScreen();
+        }
       case AppTab.expenses:
         {
           expensesBloc.dispatch(LoadExpenses());
